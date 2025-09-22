@@ -178,8 +178,9 @@ main {
   align-self: flex-start;
   font-size: 1.2rem;
 }
-.show{
-  display:flex;
+
+.show {
+  display: flex;
 }
 .hidden {
   display: none;
@@ -196,48 +197,48 @@ main {
   font-size: 0.7rem;
 }
 /*-------selected-cart----------*/
-#selected-cart{
+#selected-cart {
   flex-direction: column;
   align-self: flex-start;
   margin-top: 1rem;
   width: 100%;
 }
-.list-product{
+.list-product {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--rose300);
   padding: 1rem 0;
 }
-.list-product-text{
+.list-product-text {
   width: 70%;
 }
 .list-product-text h3 {
   color: var(--rose900);
   font-size: 1rem;
   font-weight: 600;
-  margin-block: .25rem;
+  margin-block: 0.25rem;
 }
-.product-prices{
+.product-prices {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.product-amount{
+.product-amount {
   font-size: 1rem;
   color: var(--red);
   font-weight: 600;
   margin-right: 16px;
 }
-.one-price{
+.one-price {
   color: var(--rose300);
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
-.total-price{
+.total-price {
   color: var(--rose500);
   font-weight: 600;
 }
-.remove-item{
+.remove-item {
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -261,7 +262,7 @@ main {
   font-size: 1rem;
   margin-block: 1.5rem;
 }
-#total-sum{
+#total-sum {
   color: var(--rose900);
   font-weight: 700;
   font-size: 1.5rem;
@@ -279,7 +280,7 @@ main {
 }
 #carbon-neutral p {
   color: var(--rose900);
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 #sum-section button {
   width: 100%;
