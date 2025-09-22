@@ -1,9 +1,24 @@
-let productCards = document.getElementById("product-cards");
-let selectedCart = document.getElementById("selected-cart");
-let emptyCart = document.getElementById("empty-card");
-let cartItems = [];
+const productCards = document.getElementById("product-cards");
+const selectedCart = document.getElementById("selected-cart");
+const emptyCart = document.getElementById("empty-card");
+const totalItemsText =document.getElementById("total-items");
+const cartItems = [];
 let totalItems = 0;
 let cartSum = 0;
+
+document.querySelectorAll(".remove-item").forEach(btn =>{
+  btn.addEventListener("click", ()=>{
+    totalItems--;
+    totalItemsText.textContent=totalItems;
+  })
+})
+
+document.addEventListener("click", (e) => {
+  if (e.target.closest(".add-to-cart")) {
+    console.log("added");
+    addToCart();
+  }
+});
 
 async function getProducts() {
   const products = await fetchProducts();
@@ -25,14 +40,16 @@ async function fetchProducts() {
 }
 
 function renderProducts(image, name, category, price) {
+  let id = generateId();
   let productCard = document.createElement("section");
   productCard.classList.add("product-card");
+  productCard.setAttribute("data-id", `${id}`)
   let productImage = document.createElement("div");
   productImage.classList.add("image");
   productImage.style.backgroundImage = `url(${image.mobile})`;
   productCard.appendChild(productImage);
   let cartButton = document.createElement("button");
-  cartButton.setAttribute("onclick", "addToCartBtn()")
+  cartButton.classList.add("add-to-cart");
   let cartIcon = document.createElement("img");
   cartIcon.src = "./assets/images/icon-add-to-cart.svg";
   let cartText = document.createElement("span");
@@ -54,14 +71,20 @@ function renderProducts(image, name, category, price) {
   productCards.appendChild(productCard);
 }
 
-function addToCartBtn() {
-  let totalItemsText =document.getElementById("total-items")
+function generateId(){
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+}
+
+function addToCart() {
+  
   totalItems ++;
   totalItemsText.textContent = totalItems;
   if(selectedCart.classList.contains("hidden")){
     emptyCart.classList.replace("show", "hidden");
     selectedCart.classList.replace("hidden", "show");
   }
+
+
 }
 
 window.addEventListener("load", getProducts);
