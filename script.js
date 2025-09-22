@@ -96,48 +96,26 @@ if(!product) {
   totalItemsText.textContent = totalItems;
 }
 
-function renderInCart(product){
-  let listProduct = document.createElement("span");
+function renderInCart(product) {
+  const listProduct = document.createElement("span");
   listProduct.classList.add("list-product");
-
-  let listProductText = document.createElement("div");
-  listProductText.classList.add("list-product-text");
-
-  let heading = document.createElement("h3");
-  heading.textContent = product.name;
-  listProductText.append(heading);
-  listProduct.append(listProductText);
-
-  let productPrices = document.createElement("span");
-  productPrices.classList.add("product-prices");
-
-  let productAmount = document.createElement("p");
-  productAmount.classList.add("product-amount");
-  productAmount.textContent = "1x";
-  productPrices.append(productAmount);
-
-  let onePrice = document.createElement("p");
-  onePrice.classList.add("one-price");
-  onePrice.textContent = `@$${product.price.toFixed(2)}`;
-  productPrices.append(onePrice);
-
-  let totalPrice = document.createElement("p");
-  totalPrice.classList.add("total-price");
-  totalPrice.textContent = `$${product.price.toFixed(2)}`;
-  productPrices.append(totalPrice);
-  listProductText.append(productPrices);
-  
-
-  let removeDiv = document.createElement("div");
-  removeDiv.classList.add("remove-item");
-  let removeIcon = document.createElement("img");
-  removeIcon.src = "./assets/images/icon-remove-item.svg";
-  removeIcon.atl = "Remove item from cart";
-  removeDiv.append(removeIcon);
-  listProduct.append(removeDiv);
+  listProduct.innerHTML = `
+    <div class="list-product-text">
+      <h3>${product.name}</h3>
+      <span class="product-prices">
+        <p class="product-amount">1x</p>
+        <p class="one-price">@$${product.price.toFixed(2)}</p>
+        <p class="total-price">$${product.price.toFixed(2)}</p>
+      </span>
+    </div>
+    <div class="remove-item">
+      <img src="./assets/images/icon-remove-item.svg" alt="Remove item from cart">
+    </div>
+  `;
 
   productsOnCart.append(listProduct);
 }
+
 
 window.addEventListener("load", getProducts);
  
