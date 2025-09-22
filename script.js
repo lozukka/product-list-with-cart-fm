@@ -1,4 +1,6 @@
 let productCards = document.getElementById("product-cards");
+let selectedCart = document.getElementById("selected-cart");
+let emptyCart = document.getElementById("empty-card");
 let cartItems = [];
 let totalItems = 0;
 let cartSum = 0;
@@ -56,6 +58,11 @@ function addToCartBtn() {
   let totalItemsText =document.getElementById("total-items")
   totalItems ++;
   totalItemsText.textContent = totalItems;
+  if(selectedCart.classList.contains("hidden")){
+    emptyCart.classList.replace("show", "hidden");
+    selectedCart.classList.replace("hidden", "show");
+  }
 }
 
 window.addEventListener("load", getProducts);
+ 
