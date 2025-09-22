@@ -3,6 +3,7 @@ const selectedCart = document.getElementById("selected-cart");
 const emptyCart = document.getElementById("empty-card");
 const totalItemsText = document.getElementById("total-items");
 const productsOnCart = document.getElementById("products-on-cart");
+const sumDisplay = document.getElementById("total-sum");
 const cartItems = [];
 let products = [];
 let totalItems = 0;
@@ -88,6 +89,8 @@ function addToCart(id) {
 function renderInCart(product) {
   const listProduct = document.createElement("span");
   listProduct.classList.add("list-product");
+  listProduct.dataset.id = product.id;
+  listProduct.dataset.price = product.price;
   listProduct.innerHTML = `
     <div class="list-product-text">
       <h3>${product.name}</h3>
@@ -103,10 +106,25 @@ function renderInCart(product) {
   `;
 
   productsOnCart.append(listProduct);
+  updateCartSum(product.price);
 }
 
 function removeItem(listProduct) {
-  console.log("removed:", listProduct);
+  const price = parseFloat(listProduct.dataset.price);
+  const id = listProduct.dataset.id;
+
+  console.log("removed:", id);
+
+  // päivitä summa
+  cartSum -= price;
+  sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
+
+  // poista DOMista
+  listProduct.remove();
+}
+function updateCartSum(n) {
+  cartSum = cartSum + n;
+  sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
 }
 
 window.addEventListener("load", getProducts);
