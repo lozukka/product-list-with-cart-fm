@@ -29,10 +29,12 @@ function renderProducts(image, name, category, price) {
   productImage.style.backgroundImage = `url(${image.mobile})`;
   productCard.appendChild(productImage);
   let cartButton = document.createElement("button");
+  cartButton.setAttribute("onclick", "addToCartBtn()")
   let cartIcon = document.createElement("img");
   cartIcon.src = "./assets/images/icon-add-to-cart.svg";
-  cartButton.appendChild(cartIcon);
-  cartButton.textContent = "Add to Cart";
+  let cartText = document.createElement("span");
+  cartText.textContent = "Add to Cart";
+  cartButton.append(cartIcon, cartText);
   productCard.appendChild(cartButton);
   let categoryText = document.createElement("p");
   categoryText.classList.add("category");

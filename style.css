@@ -160,6 +160,11 @@ main {
   padding: 1.5rem;
   border-radius: 8px;
 }
+@media (min-width: 700px) {
+  #cart {
+    width: 350px;
+  }
+}
 @media (min-width: 1440px) {
   #cart {
     width: 20%;
