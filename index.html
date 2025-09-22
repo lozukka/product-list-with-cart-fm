@@ -32,10 +32,34 @@
       </section>
       <section id="cart">
         <h2>Your Cart (<span id="total-items">0</span>)</h2>
-        <section id="empty-card">
+        <div id="empty-card">
           <img src="./assets/images/illustration-empty-cart.svg" alt="" />
           <p>Your added items will appear here</p>
-        </section>
+        </div>
+
+        <div id="selected-cart">
+          <div id="products-on-cart">
+            <span class="list-product">
+              <div class="list-product-text">
+              <h3>Classic Tiramisu</h3>
+              <span class="product-prices">
+              <p class="product-amount">1x</p>
+              <p class="one-price">@$6.50</p>
+              <p class="total-price">$6.50</p>
+              </span>
+            </div>
+              <div class="remove-item"><img src="./assets/images/icon-remove-item.svg" alt=""></div>
+            </span>
+          </div>
+          <section id="sum-section">
+            <div>
+              <h4>Order Total</h4>
+              <span id="total-sum">$46.70</span>
+            </div>
+            <div id="carbon-neutral"><img src="./assets/images/icon-carbon-neutral.svg" alt=""> <p>This is a <strong>carbon-neutral</strong> delivery.</p></div>
+            <button>Confirm Order</button>
+          </section>
+        </div>
       </section>
     </main>
     <!--<div class="attribution">

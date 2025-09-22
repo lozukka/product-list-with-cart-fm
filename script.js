@@ -1,4 +1,7 @@
 let productCards = document.getElementById("product-cards");
+let cartItems = [];
+let totalItems = 0;
+let cartSum = 0;
 
 async function getProducts() {
   const products = await fetchProducts();
@@ -13,7 +16,6 @@ async function fetchProducts() {
     if (!response.ok) throw new Error("Failed to load products");
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -21,7 +23,6 @@ async function fetchProducts() {
 }
 
 function renderProducts(image, name, category, price) {
-  console.log(image, name, category, price);
   let productCard = document.createElement("section");
   productCard.classList.add("product-card");
   let productImage = document.createElement("div");
@@ -52,7 +53,9 @@ function renderProducts(image, name, category, price) {
 }
 
 function addToCartBtn() {
-  console.log("hei");
+  let totalItemsText =document.getElementById("total-items")
+  totalItems ++;
+  totalItemsText.textContent = totalItems;
 }
 
 window.addEventListener("load", getProducts);
