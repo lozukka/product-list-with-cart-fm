@@ -8,6 +8,7 @@ const confirmOrderBtn = document.getElementById("confirm-order");
 const closePopupBtn = document.getElementById("close-popup");
 const popup = document.getElementById("popup-wrapper");
 const confirmOrderList = document.getElementById("confirmed-order-list");
+const confirmedTotalSum = document.getElementById("confirmed-sum");
 const cartItems = [];
 let products = [];
 let totalItems = 0;
@@ -78,10 +79,6 @@ function generateId() {
 }
 
 function addToCart(id) {
-  if (selectedCart.classList.contains("hidden")) {
-    emptyCart.classList.replace("show", "hidden");
-    selectedCart.classList.replace("hidden", "show");
-  }
   const product = products.find((p) => p.id == id);
   if (!product) {
     console.warn("Product can't be found with id: ", id);
@@ -92,8 +89,17 @@ function addToCart(id) {
   console.log(cartItems);
   totalItems++;
   totalItemsText.textContent = totalItems;
+  checkIfCartEmpty();
 }
-
+function checkIfCartEmpty() {
+  if (cartItems.length > 0) {
+    emptyCart.classList.replace("show", "hidden");
+    selectedCart.classList.replace("hidden", "show");
+  } else {
+    emptyCart.classList.replace("hidden", "show");
+    selectedCart.classList.replace("show", "hidden");
+  }
+}
 function renderInCart(product) {
   const listProduct = document.createElement("span");
   listProduct.classList.add("list-product");
@@ -130,6 +136,7 @@ function removeItem(listProduct) {
   if (index !== -1) {
     cartItems.splice(index, 1);
   }
+  checkIfCartEmpty();
 }
 
 function updateCartSum(n) {
@@ -149,11 +156,18 @@ function confirmOrder() {
   });
 
   //update total sum in confirmed order
+  confirmedTotalSum.textContent = `$${cartSum.toFixed(2)}`;
 }
 
 function closePopup() {
   popup.classList.remove("open-popup");
   document.body.classList.remove("no-scroll");
+  cartSum = 0;
+  sumDisplay.textContent = `$00`;
+  cartItems.splice(0, cartItems.length);
+  totalItemsText.textContent = 0;
+  productsOnCart.innerHTML = "";
+  checkIfCartEmpty();
 }
 
 function renderConfirmedProducts(product) {
@@ -171,11 +185,9 @@ function renderConfirmedProducts(product) {
   <p class="confirmed-item-count">1x</p>
   <p class="confirmed-item-price">@$${product.price.toFixed(2)}</p>
   </div>
-                </div>
-                <p class="confirmed-single-total">$${product.price.toFixed(
-                  2
-                )}</p>
-              </div>
+  </div>
+  <p class="confirmed-single-total">$${product.price.toFixed(2)}</p>
+  </div>
  `;
   confirmOrderList.append(listItem);
 }
