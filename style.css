@@ -165,7 +165,6 @@ main {
 
 .add-more-to-cart {
   background: var(--red);
-  border: 1px solid var(--rose400);
   border-radius: 20px;
   padding: 8px 25px;
   display: flex;
