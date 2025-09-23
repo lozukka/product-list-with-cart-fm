@@ -4,6 +4,7 @@ const emptyCart = document.getElementById("empty-card");
 const totalItemsText = document.getElementById("total-items");
 const productsOnCart = document.getElementById("products-on-cart");
 const sumDisplay = document.getElementById("total-sum");
+const confirmOrderBtn = document.getElementById("confirm-order");
 const cartItems = [];
 let products = [];
 let totalItems = 0;
@@ -25,6 +26,8 @@ document.addEventListener("click", (e) => {
     removeItem(listProduct);
   }
 });
+
+confirmOrderBtn.addEventListener("click", () => confirmOrder());
 
 async function getProducts() {
   products = await fetchProducts();
@@ -125,6 +128,10 @@ function removeItem(listProduct) {
 function updateCartSum(n) {
   cartSum = cartSum + n;
   sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
+}
+
+function confirmOrder() {
+  alert("Hurraa!");
 }
 
 window.addEventListener("load", getProducts);

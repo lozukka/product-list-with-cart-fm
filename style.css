@@ -50,6 +50,25 @@ body {
 h1 {
   margin-block: 0;
   color: var(--rose900);
+  margin-left: 1rem;
+}
+header {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  align-items: flex-start;
+}
+@media (min-width: 700px) {
+  header {
+    max-width: 80%;
+  }
+}
+@media (min-width: 1440px) {
+  header {
+    max-width: 1290px;
+    align-items: flex-start;
+    flex-direction: row;
+  }
 }
 main {
   display: flex;
