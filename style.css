@@ -306,6 +306,7 @@ main {
   width: 20px;
   border-radius: 50%;
   border: 1px solid var(--rose400);
+  color: var(--rose400);
   padding: 0.3rem;
   display: flex;
   align-items: center;
@@ -314,10 +315,9 @@ main {
 }
 .remove-item:hover {
   border: 1px solid var(--rose900);
+  color: var(--rose900);
 }
-.remove-item svg path:hover {
-  fill: var(--rose900);
-}
+
 #sum-section div:first-child {
   display: flex;
   width: 100%;
