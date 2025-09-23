@@ -5,6 +5,8 @@ const totalItemsText = document.getElementById("total-items");
 const productsOnCart = document.getElementById("products-on-cart");
 const sumDisplay = document.getElementById("total-sum");
 const confirmOrderBtn = document.getElementById("confirm-order");
+const closePopupBtn = document.getElementById("close-popup");
+const popup = document.getElementById("popup-wrapper");
 const cartItems = [];
 let products = [];
 let totalItems = 0;
@@ -28,6 +30,7 @@ document.addEventListener("click", (e) => {
 });
 
 confirmOrderBtn.addEventListener("click", () => confirmOrder());
+closePopupBtn.addEventListener("click", () => closePopup());
 
 async function getProducts() {
   products = await fetchProducts();
@@ -131,7 +134,11 @@ function updateCartSum(n) {
 }
 
 function confirmOrder() {
-  alert("Hurraa!");
+  popup.classList.add("open-popup");
+}
+
+function closePopup() {
+  popup.classList.remove("open-popup");
 }
 
 window.addEventListener("load", getProducts);

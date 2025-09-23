@@ -310,7 +310,8 @@ main {
   color: var(--rose900);
   font-size: 0.85rem;
 }
-#sum-section button {
+#sum-section button,
+#popup button {
   width: 100%;
   background: var(--red);
   color: var(--rose10);
@@ -320,6 +321,26 @@ main {
   font-weight: 500;
   cursor: pointer;
 }
-#sum-section button:hover {
+#sum-section button:hover,
+#popup button:hover {
   background: var(--rose500);
+}
+
+#popup-wrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+}
+#popup {
+  width: 200px;
+  height: 200px;
+  background: var(--rose10);
+}
+#popup-wrapper.open-popup {
+  display: block;
 }
