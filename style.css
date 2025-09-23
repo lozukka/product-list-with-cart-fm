@@ -347,7 +347,7 @@ main {
 }
 #popup {
   width: 100%;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   background: var(--rose10);
   display: flex;
@@ -389,9 +389,17 @@ main {
 #confirmed-order-list {
   color: var(--rose900);
   display: flex;
+  flex-direction: column;
   width: 95%;
   align-items: center;
-  border-bottom: 1px solid var(--rose300);
+  padding: 1rem 0.5rem;
+}
+.confirmed-order-list-item {
+  color: var(--rose900);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid rgba(201, 174, 166, 0.4);
   padding: 1rem 0.5rem;
 }
 .thumbnail-image {
@@ -416,7 +424,7 @@ main {
 }
 .confirmed-price {
   display: flex;
-  justify-content: space-between;
+  gap: 2.5rem;
 }
 .confirmed-single-total {
   margin-left: auto;

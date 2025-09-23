@@ -7,6 +7,7 @@ const sumDisplay = document.getElementById("total-sum");
 const confirmOrderBtn = document.getElementById("confirm-order");
 const closePopupBtn = document.getElementById("close-popup");
 const popup = document.getElementById("popup-wrapper");
+const confirmOrderList = document.getElementById("confirmed-order-list");
 const cartItems = [];
 let products = [];
 let totalItems = 0;
@@ -87,7 +88,8 @@ function addToCart(id) {
     return;
   }
   renderInCart(product);
-
+  cartItems.push(product);
+  console.log(cartItems);
   totalItems++;
   totalItemsText.textContent = totalItems;
 }
@@ -119,15 +121,17 @@ function removeItem(listProduct) {
   const price = parseFloat(listProduct.dataset.price);
   const id = listProduct.dataset.id;
 
-  console.log("removed:", id);
-
-  // päivitä summa
   cartSum -= price;
   sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
 
-  // poista DOMista
   listProduct.remove();
+
+  const index = cartItems.findIndex((item) => item.id === id);
+  if (index !== -1) {
+    cartItems.splice(index, 1);
+  }
 }
+
 function updateCartSum(n) {
   cartSum = cartSum + n;
   sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
@@ -136,11 +140,44 @@ function updateCartSum(n) {
 function confirmOrder() {
   popup.classList.add("open-popup");
   document.body.classList.add("no-scroll");
+
+  //for each product in cart loop
+  cartItems.forEach((product) => {
+    const { id, image, name, category, price } = product;
+    renderConfirmedProducts(product);
+    console.log(product);
+  });
+
+  //update total sum in confirmed order
 }
 
 function closePopup() {
   popup.classList.remove("open-popup");
   document.body.classList.remove("no-scroll");
+}
+
+function renderConfirmedProducts(product) {
+  const listItem = document.createElement("div");
+  listItem.classList.add("confirmed-order-list-item");
+  listItem.dataset.id = product.id;
+  listItem.dataset.price = product.price;
+  listItem.innerHTML = `
+  <div class="thumbnail-image" style="background-image: url(${
+    product.image.thumbnail
+  });"></div>
+  <div class="confirmed-order-text">
+  <h3>${product.name}</h3>
+  <div class="confirmed-price">
+  <p class="confirmed-item-count">1x</p>
+  <p class="confirmed-item-price">@$${product.price.toFixed(2)}</p>
+  </div>
+                </div>
+                <p class="confirmed-single-total">$${product.price.toFixed(
+                  2
+                )}</p>
+              </div>
+ `;
+  confirmOrderList.append(listItem);
 }
 
 window.addEventListener("load", getProducts);
