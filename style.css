@@ -131,6 +131,10 @@ main {
   max-width: 100%;
   margin-top: -20px;
 }
+.product-card button:hover {
+  color: var(--red);
+  border: 1px solid var(--red);
+}
 .product-card button img {
   width: 21px;
   height: 20px;
@@ -249,7 +253,12 @@ main {
   justify-content: center;
   cursor: pointer;
 }
-
+.remove-item:hover {
+  border: 1px solid var(--rose900);
+}
+.remove-item svg path:hover {
+  fill: var(--rose900);
+}
 #sum-section div:first-child {
   display: flex;
   width: 100%;
@@ -291,4 +300,7 @@ main {
   padding: 10px;
   font-weight: 500;
   cursor: pointer;
+}
+#sum-section button:hover {
+  background: var(--rose500);
 }
