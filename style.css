@@ -211,7 +211,7 @@ main {
 .hidden {
   display: none;
 }
-/*-------selected-cart----------*/
+/*-------empty-cart----------*/
 #empty-card {
   flex-direction: column;
   align-items: center;
@@ -328,7 +328,7 @@ main {
 #popup button:hover {
   background: var(--rose500);
 }
-
+/*-------pop-up----------*/
 #popup-wrapper {
   display: flex;
   position: fixed;
@@ -338,22 +338,32 @@ main {
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+@media (min-width: 700px) {
+  #popup-wrapper {
+    align-items: center;
+  }
 }
 #popup {
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   border-radius: 8px;
   background: var(--rose10);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 @media (min-width: 700px) {
   #popup {
     width: 500px;
   }
 }
-
 #popup svg {
-  width: 25px;
+  width: 30px;
+  height: 30px;
 }
 #popup h2 {
   font-size: 2rem;
@@ -367,4 +377,75 @@ main {
 }
 #popup-wrapper.open-popup {
   display: flex;
+}
+#confirmed-order {
+  background: var(--rose100);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#confirmed-order-list {
+  color: var(--rose900);
+  display: flex;
+  width: 95%;
+  align-items: center;
+  border-bottom: 1px solid var(--rose300);
+  padding: 1rem 0.5rem;
+}
+.thumbnail-image {
+  background-image: url(./assets/images/image-baklava-thumbnail.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  border-radius: 8px;
+  height: 40px;
+  margin-right: 1rem;
+}
+.confirmed-order-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.confirmed-order-text h3 {
+  font-size: 1rem;
+  color: var(--rose900);
+  font-weight: 600;
+}
+.confirmed-price {
+  display: flex;
+  justify-content: space-between;
+}
+.confirmed-single-total {
+  margin-left: auto;
+  color: var(--rose900) !important;
+  font-weight: 700;
+}
+.confirmed-item-count {
+  color: var(--red) !important;
+  font-weight: 600;
+}
+.confirmed-item-price {
+  color: var(--rose400) !important;
+  font-weight: 500;
+}
+#confirmed-order-total {
+  margin: 1rem 0;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+#confirmed-order-total h4 {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--rose400);
+  margin-block: 0;
+}
+#confirmed-sum {
+  color: var(--rose900);
+  font-weight: 700;
+  font-size: 1.5rem;
 }
