@@ -135,10 +135,12 @@ function updateCartSum(n) {
 
 function confirmOrder() {
   popup.classList.add("open-popup");
+  document.body.classList.add("no-scroll");
 }
 
 function closePopup() {
   popup.classList.remove("open-popup");
+  document.body.classList.remove("no-scroll");
 }
 
 window.addEventListener("load", getProducts);

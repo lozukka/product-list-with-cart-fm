@@ -47,6 +47,9 @@ body {
   max-width: 93vw;
   margin: auto;
 }
+body.no-scroll {
+  overflow: hidden;
+}
 h1 {
   margin-block: 0;
   color: var(--rose900);
@@ -327,20 +330,41 @@ main {
 }
 
 #popup-wrapper {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
 }
 #popup {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
   background: var(--rose10);
 }
+@media (min-width: 700px) {
+  #popup {
+    width: 500px;
+  }
+}
+
+#popup svg {
+  width: 25px;
+}
+#popup h2 {
+  font-size: 2rem;
+  margin-block: 0;
+  color: var(--rose900);
+  font-weight: 700;
+}
+#popup p {
+  font-size: 0.8rem;
+  color: var(--rose500);
+}
 #popup-wrapper.open-popup {
-  display: block;
+  display: flex;
 }
