@@ -174,7 +174,7 @@ function updateCart(id, qty) {
 function removeItem(listProduct) {
   const price = parseFloat(listProduct.dataset.price);
   const id = listProduct.dataset.id;
-
+  //check quatities
   cartSum -= price;
   sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
 
@@ -221,9 +221,17 @@ function closePopup() {
   totalItemsText.textContent = 0;
   productsOnCart.innerHTML = "";
   checkIfCartEmpty();
+  //check add to cart buttons
 }
 
 function renderConfirmedProducts(product) {
+  //check quantities of the products
+  const listProduct = document.querySelector(
+    `.list-product[data-id="${product.id}"]`
+  );
+  const productAmount =
+    listProduct.querySelector(".product-amount").textContent;
+  const qty = parseInt(productAmount);
   const listItem = document.createElement("div");
   listItem.classList.add("confirmed-order-list-item");
   listItem.dataset.id = product.id;
@@ -235,11 +243,11 @@ function renderConfirmedProducts(product) {
   <div class="confirmed-order-text">
   <h3>${product.name}</h3>
   <div class="confirmed-price">
-  <p class="confirmed-item-count">1x</p>
+  <p class="confirmed-item-count">${productAmount}</p>
   <p class="confirmed-item-price">@$${product.price.toFixed(2)}</p>
   </div>
   </div>
-  <p class="confirmed-single-total">$${product.price.toFixed(2)}</p>
+  <p class="confirmed-single-total">$${(qty * product.price).toFixed(2)}</p>
   </div>
  `;
   confirmOrderList.append(listItem);
