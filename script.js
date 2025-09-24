@@ -188,6 +188,7 @@ function updateCartSum() {
     total += qty * price;
   });
 
+  cartSum = total;
   sumDisplay.textContent = `$${total.toFixed(2)}`;
 }
 
@@ -195,14 +196,12 @@ function confirmOrder() {
   popup.classList.add("open-popup");
   document.body.classList.add("no-scroll");
 
-  //for each product in cart loop
   cartItems.forEach((product) => {
     const { id, image, name, category, price } = product;
     renderConfirmedProducts(product);
     console.log(product);
   });
 
-  //update total sum in confirmed order
   confirmedTotalSum.textContent = `$${cartSum.toFixed(2)}`;
 }
 
