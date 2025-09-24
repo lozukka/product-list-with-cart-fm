@@ -278,5 +278,13 @@ function replaceButton(add) {
   `;
   add.replaceWith(addMoreToCartBtn);
 }
-
+function addCartButton(productCard) {
+  const cartButton = document.createElement("button");
+  cartButton.classList.add("add-to-cart");
+  cartButton.innerHTML = `
+            <img src="./assets/images/icon-add-to-cart.svg" alt="" /> Add to
+            Cart`;
+  const oldDiv = productCard.querySelector(".add-more-to-cart");
+  oldDiv.replaceWith(cartButton);
+}
 window.addEventListener("load", getProducts);
