@@ -226,6 +226,7 @@ function closePopup() {
   cartSum = 0;
   sumDisplay.textContent = `$00`;
   cartItems.splice(0, cartItems.length);
+  totalItems = 0;
   totalItemsText.textContent = 0;
   productsOnCart.innerHTML = "";
   confirmOrderList.innerHTML = "";
