@@ -48,6 +48,9 @@ document.addEventListener("click", (e) => {
     let qty = parseInt(span.textContent, 10);
     if (qty > 1) {
       span.textContent = --qty;
+      const addMore = decrement.closest(".product-card");
+      const id = addMore.dataset.id;
+      updateCart(wrapper.closest(".product-card").dataset.id, qty);
     } else {
       //change div to button & remove from cart
     }
@@ -147,7 +150,7 @@ function renderInCart(product) {
   `;
 
   productsOnCart.append(listProduct);
-  updateCartSum(product.price);
+  updateCartSum();
 }
 function updateCart(id, qty) {
   const listProduct = document.querySelector(`.list-product[data-id="${id}"]`);
@@ -155,13 +158,11 @@ function updateCart(id, qty) {
 
   const price = parseFloat(listProduct.dataset.price);
 
-  // päivitä määrä ja total-price
   listProduct.querySelector(".product-amount").textContent = qty + "x";
   listProduct.querySelector(".total-price").textContent =
     "$" + (qty * price).toFixed(2);
 
-  // päivitä myös cart-total
-  updateCartSum(qty * price);
+  updateCartSum();
 }
 function removeItem(listProduct) {
   const price = parseFloat(listProduct.dataset.price);
@@ -179,9 +180,15 @@ function removeItem(listProduct) {
   checkIfCartEmpty();
 }
 
-function updateCartSum(n) {
-  cartSum = cartSum + n;
-  sumDisplay.textContent = `$${cartSum.toFixed(2)}`;
+function updateCartSum() {
+  let total = 0;
+  document.querySelectorAll(".list-product").forEach((item) => {
+    const qty = parseInt(item.querySelector(".product-amount").textContent);
+    const price = parseFloat(item.dataset.price);
+    total += qty * price;
+  });
+
+  sumDisplay.textContent = `$${total.toFixed(2)}`;
 }
 
 function confirmOrder() {
