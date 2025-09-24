@@ -21,6 +21,7 @@ document.addEventListener("click", (e) => {
     const productCard = add.closest(".product-card");
     const id = productCard.dataset.id;
     addToCart(id);
+    replaceButton(add);
   }
   if (rem) {
     const listProduct = rem.closest(".list-product");
@@ -190,6 +191,40 @@ function renderConfirmedProducts(product) {
   </div>
  `;
   confirmOrderList.append(listItem);
+}
+
+function replaceButton(add) {
+  const addMoreToCartBtn = document.createElement("div");
+  addMoreToCartBtn.classList.add("add-more-to-cart");
+  addMoreToCartBtn.innerHTML = `
+  <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                fill="none"
+                viewBox="0 0 10 10"
+              >
+                <path
+                  fill="currentColor"
+                  d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
+                />
+              </svg>
+            </button>
+            <span>1</span>
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="2"
+                fill="none"
+                viewBox="0 0 10 2"
+              >
+                <path fill="currentColor" d="M0 .375h10v1.25H0V.375Z" />
+              </svg>
+            </button>
+  `;
+  add.replaceWith(addMoreToCartBtn);
 }
 
 window.addEventListener("load", getProducts);
