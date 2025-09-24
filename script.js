@@ -17,6 +17,8 @@ let cartSum = 0;
 document.addEventListener("click", (e) => {
   const add = e.target.closest(".add-to-cart");
   const rem = e.target.closest(".remove-item");
+  const increment = e.target.closest(".increment");
+  const decrement = e.target.closest(".decrement");
   if (add) {
     const productCard = add.closest(".product-card");
     const id = productCard.dataset.id;
@@ -29,6 +31,30 @@ document.addEventListener("click", (e) => {
     totalItems--;
     totalItemsText.textContent = totalItems;
     removeItem(listProduct);
+  }
+  if (increment) {
+    const wrapper = increment.closest(".add-more-to-cart");
+    const span = wrapper.querySelector("span");
+    let qty = parseInt(span.textContent, 10);
+    span.textContent = ++qty;
+    const addMore = increment.closest(".product-card");
+    const id = addMore.dataset.id;
+    updateCart(wrapper.closest(".product-card").dataset.id, qty);
+    //update in the cart: amount + item total price -> update cart sum
+  }
+  if (decrement) {
+    const wrapper = decrement.closest(".add-more-to-cart");
+    const span = wrapper.querySelector("span");
+    let qty = parseInt(span.textContent, 10);
+    if (qty > 1) {
+      span.textContent = --qty;
+    } else {
+      //change div to button & remove from cart
+    }
+
+    //update the add more to cart -element span
+    //update in the cart: amount + item total price -> update cart sum
+    //check if amount is 0 -> change div to button & remove from cart
   }
 });
 
@@ -123,7 +149,20 @@ function renderInCart(product) {
   productsOnCart.append(listProduct);
   updateCartSum(product.price);
 }
+function updateCart(id, qty) {
+  const listProduct = document.querySelector(`.list-product[data-id="${id}"]`);
+  if (!listProduct) return;
 
+  const price = parseFloat(listProduct.dataset.price);
+
+  // päivitä määrä ja total-price
+  listProduct.querySelector(".product-amount").textContent = qty + "x";
+  listProduct.querySelector(".total-price").textContent =
+    "$" + (qty * price).toFixed(2);
+
+  // päivitä myös cart-total
+  updateCartSum(qty * price);
+}
 function removeItem(listProduct) {
   const price = parseFloat(listProduct.dataset.price);
   const id = listProduct.dataset.id;
@@ -197,32 +236,32 @@ function replaceButton(add) {
   const addMoreToCartBtn = document.createElement("div");
   addMoreToCartBtn.classList.add("add-more-to-cart");
   addMoreToCartBtn.innerHTML = `
-  <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="10"
-                fill="none"
-                viewBox="0 0 10 10"
-              >
-                <path
-                  fill="currentColor"
-                  d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
-                />
-              </svg>
-            </button>
-            <span>1</span>
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="2"
-                fill="none"
-                viewBox="0 0 10 2"
-              >
-                <path fill="currentColor" d="M0 .375h10v1.25H0V.375Z" />
-              </svg>
-            </button>
+  <button class="decrement">
+  <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="10"
+        height="2"
+        fill="none"
+        viewBox="0 0 10 2"
+      >
+        <path fill="currentColor" d="M0 .375h10v1.25H0V.375Z" />
+      </svg>
+    </button>
+    <span>1</span>
+    <button class="increment">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="10"
+        height="10"
+        fill="none"
+        viewBox="0 0 10 10"
+      >
+        <path
+          fill="currentColor"
+          d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"
+        />
+      </svg>
+    </button>
   `;
   add.replaceWith(addMoreToCartBtn);
 }
