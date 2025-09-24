@@ -30,6 +30,7 @@ document.addEventListener("click", (e) => {
     const id = listProduct.dataset.id;
     totalItems--;
     totalItemsText.textContent = totalItems;
+    console.log(listProduct);
     removeItem(listProduct);
   }
   if (increment) {
@@ -40,21 +41,27 @@ document.addEventListener("click", (e) => {
     const addMore = increment.closest(".product-card");
     const id = addMore.dataset.id;
     updateCart(wrapper.closest(".product-card").dataset.id, qty);
-    //update in the cart: amount + item total price -> update cart sum
   }
   if (decrement) {
     const wrapper = decrement.closest(".add-more-to-cart");
     const span = wrapper.querySelector("span");
+    const productCard = decrement.closest(".product-card");
+    const id = productCard.dataset.id;
     let qty = parseInt(span.textContent, 10);
     if (qty > 1) {
       span.textContent = --qty;
-      const addMore = decrement.closest(".product-card");
-      const id = addMore.dataset.id;
+
       updateCart(wrapper.closest(".product-card").dataset.id, qty);
     } else {
-      //change div to button & remove from cart
+      const listProduct = document.querySelector(
+        `.list-product[data-id="${id}"]`
+      );
+      if (listProduct) {
+        removeItem(listProduct); // oma funktiosi
+      }
+      addCartButton(productCard); // korvaa nappi takaisin Add to cartiksi
     }
-
+    //change div to button & remove from cart
     //update the add more to cart -element span
     //update in the cart: amount + item total price -> update cart sum
     //check if amount is 0 -> change div to button & remove from cart
